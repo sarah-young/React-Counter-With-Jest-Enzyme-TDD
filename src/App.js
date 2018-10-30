@@ -13,7 +13,7 @@ class App extends Component {
     }
   }
 
-  randomFunction() {
+  decrementFunction() {
     let proxyCounter = this.state.counter;
     if (proxyCounter !==0) {
       this.setState({counter: this.state.counter - 1})
@@ -22,16 +22,20 @@ class App extends Component {
     }
   }
 
+  incrementFunction() {
+    this.setState(({counter: this.state.counter + 1}))
+}
+
   render() {
     return (
       <div data-test="component-app">
       <h1 data-test="counter-display">The counter is currently {this.state.counter}</h1>
       <button data-test="increment-button"
-      onClick={() => this.setState({ counter: this.state.counter + 1})}>
+      onClick={this.incrementFunction.bind(this)}>
       Increment counter
       </button>
       <button data-test="decrement-button"
-      onClick={this.randomFunction.bind(this)}> 
+      onClick={this.decrementFunction.bind(this)}>
       Decrement Counter
       </button>
       </div>
