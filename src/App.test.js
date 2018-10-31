@@ -92,3 +92,14 @@ test ('counter does not go below zero', () => {
   const counterDisplay = findByTestAttr(wrapper, 'counter-display');
   expect(counterDisplay.text()).toContain(counter);
 });
+
+test ('alert message displays', () => {
+  const counter = 0;
+  const wrapper = setup(null, {counter});
+  const button = findByTestAttr(wrapper, 'decrement-button');
+
+  button.simulate('click');
+  wrapper.update();
+
+  
+});
