@@ -90,16 +90,35 @@ test ('counter does not go below zero', () => {
   wrapper.update();
   //find display and test
   const counterDisplay = findByTestAttr(wrapper, 'counter-display');
+
   expect(counterDisplay.text()).toContain(counter);
 });
 
-test ('alert message displays', () => {
-  const counter = 0;
+test ('error message hidden when appropriate', () => {
+  const wrapper = setup();
+  const errorDiv = findByTestAttr(wrapper, 'error-div');
+  const errorDivHasClass = errorDiv.hasClass('error-false');
+  expect(errorDivHasClass).toBe(true);
+});
+
+test ('error message shows when d-btn clicked & at 0', () => {
+  const counter = 0; //set counter variable
   const wrapper = setup(null, {counter});
   const button = findByTestAttr(wrapper, 'decrement-button');
-
   button.simulate('click');
   wrapper.update();
+  const errorDiv = findByTestAttr(wrapper, 'error-div');
+  const errorDivHasClass = errorDiv.hasClass('error-true');
+  expect(errorDivHasClass).toBe(true);
+});
 
-  
+test ('error message disappears when i-btn click & at 0', () => {
+  const counter = 0;
+  const wrapper = setup(null, {counter});
+  const button = findByTestAttr(wrapper, 'increment-button');
+  button.simulate('click');
+  wrapper.update();
+  const errorDiv = findByTestAttr(wrapper, 'error-div');
+  const errorDivHasClass = errorDiv.hasClass('error-false');
+  expect(errorDivHasClass).toBe(true);
 });
